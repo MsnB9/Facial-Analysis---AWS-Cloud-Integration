@@ -1,0 +1,98 @@
+{ 
+
+  "AWSTemplateFormatVersion": "2010-09-09", 
+
+  "Description": "Template to create an SQS queue and a DynamoDB table", 
+
+  "Resources": { 
+
+    "MyQueue": { 
+
+      "Type": "AWS::SQS::Queue", 
+
+      "Properties": { 
+
+        "QueueName": "myQueue1831444" 
+
+      } 
+
+    }, 
+
+    "MyDynamoDBTable": { 
+
+      "Type": "AWS::DynamoDB::Table", 
+
+      "Properties": { 
+
+            "AttributeName": "ImageName", 
+
+            "AttributeType": "S" 
+
+          } 
+
+        ], 
+
+        "KeySchema": [ 
+
+          { 
+
+            "AttributeName": "ImageName", 
+
+            "KeyType": "HASH" 
+
+          } 
+
+        ], 
+
+        "ProvisionedThroughput": { 
+
+          "ReadCapacityUnits": 5, 
+
+          "WriteCapacityUnits": 10 
+
+        }, 
+
+        "TableName": "myDynamoDBTable1831444" 
+
+      } 
+
+    } 
+
+  }, 
+
+  "Outputs": { 
+
+    "QueueURL": { 
+
+      "Description": "URL of the newly created SQS Queue", 
+
+      "Value": {"Fn::GetAtt": ["MyQueue", "QueueUrl"]} 
+
+    }, 
+
+    "QueueARN": { 
+
+      "Description": "ARN of the newly created SQS Queue", 
+
+      "Value": {"Fn::GetAtt": ["MyQueue", "Arn"]} 
+
+    }, 
+
+    "TableName": { 
+
+      "Description": "Name of the newly created DynamoDB Table", 
+
+      "Value": {"Ref": "MyDynamoDBTable"} 
+
+    }, 
+
+    "TableARN": { 
+
+      "Description": "ARN of the newly created DynamoDB Table", 
+
+      "Value": {"Fn::GetAtt": ["MyDynamoDBTable", "Arn"]} 
+
+    } 
+
+  } 
+
